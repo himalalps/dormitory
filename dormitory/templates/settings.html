@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<h2>设置</h2>
+<p><b>{{ name }}</b>，欢迎，请修改您的个人信息。</p>
+{{ render_form(form) }}
+{% endblock %}

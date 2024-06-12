@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display:flex; justify-content: center;">
+    <div class="card text-white bg-dark mb-3" style="width: 40rem;">
+        <div class="card-header">Oops!</div>
+        <div class="card-body">
+            <h4 class="card-title">
+                <span>500 - Internal Server Error</span>
+                <a class="btn btn-outline-light float-right" href="{{ url_for('index') }}">返回</a>
+            </h4>
+        </div>
+    </div>
+</div>
+{% endblock %}

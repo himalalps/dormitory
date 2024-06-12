@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>公寓信息</h2>
+{% if current_user.is_authenticated %}
+<p><b>{{ name }}</b>，欢迎。</p>
+{% else %}
+<p>您当前是访客，登录后可使用更多功能。</p>
+{% endif %}
+{{ render_table(dorms, titles, show_actions=True, actions_title="", custom_actions=[
+('详细信息', 'info-square', ('dorm_info', [('dorm_id', ':id')]))
+]) }}
+{{ render_pagination(pagination, align='right') }}
+<img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}" title="to~to~ro~">
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>维修管理</h2>
+<p><b>{{ name }}</b>，欢迎，以下是{{ dorm_id }}号楼的维修申请。</p>
+{{ render_table(fix, title, show_actions=True, actions_title="", custom_actions=[
+('详细信息', 'info-square', ('fix_info', [('fix_id', ':id')]))
+]) }}
+{{ render_pagination(pagination, align='right') }}
+{% endblock %}

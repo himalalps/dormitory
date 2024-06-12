@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>个人信息</h2>
+<p><b>{{ name }}</b>，欢迎。</p>
+<h4>{{ room.id }}室</h4>
+<p>可居住{{ room.spaces }}人，已入住{{ room.residents }}人，以下是相关信息。</p>
+{{ render_table(students, title) }}
+<hr>
+<h4>申请转宿</h4>
+<p>如需转宿，请填写以下信息，我们会尽快处理。</p>
+{{ render_form(form) }}
+<p></p>
+{% if move %}
+<h4>申请记录</h4>
+{{ render_table(move, move_title) }}
+{% endif %}
+{% endblock %}

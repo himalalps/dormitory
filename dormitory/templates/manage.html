@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>公寓管理</h2>
+<p><b>{{ name }}</b>，欢迎，您可以管理{{ dorm_id }}号楼的信息。</p>
+<p>{{ dorm.id }}号楼共{{ dorm.rooms }}个房间，剩余空床位{{ dorm.left_residents}}张，以下是详细房间列表。</p>
+<p></p>
+{{ render_table(rooms, title, show_actions=True, actions_title="", custom_actions=[
+('详细信息', 'info-square', ('room_info', [('room_id', ':id')]))
+], new_url=url_for('new_room', dorm_id=dorm.id)) }}
+{{ render_pagination(pagination, align='right') }}
+{% if moves %}
+<hr>
+<h4>转宿申请</h4>
+<p>以下是申请转宿的学生信息。</p>
+{{ render_table(moves, move_title, show_actions=True, actions_title="", custom_actions=[
+('详细信息', 'info-square', ('move_info', [('move_id', ':id')]))
+]) }}
+{{ render_pagination(move_pagination, align='right') }}
+{% endif %}
+{% endblock %}

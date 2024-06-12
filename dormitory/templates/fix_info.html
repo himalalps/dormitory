@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>维修信息</h2>
+<p><b>{{ name }}</b>，欢迎，以下是该报修的详细信息。</p>
+<h4>维修编号</h4>
+<p>{{ fix.id }}</p>
+<h4>学生学号</h4>
+<p>{{ fix.student_id }}</p>
+<h4>房间号</h4>
+<p>{{ student.room_id }}</p>
+<h4>提交时间</h4>
+<p>{{ fix.submit_time }}</p>
+<h4>维修状态</h4>
+<p>{{ fix.status }}</p>
+<h4>维修类别</h4>
+<p>{{ fix.category }}</p>
+<h4>维修内容</h4>
+<p>{{ fix.content }}</p>
+<h4>维修图片</h4>
+<img src={{ fix.picture }} width="300"></img>
+<p></p>
+{% if user_type == "manager" and fix.status == '未处理' %}
+{{ render_form(form) }}
+{% endif %}
+{% endblock %}

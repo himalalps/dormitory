@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>{{ dorm }}号楼信息</h2>
+{% if current_user.is_authenticated %}
+<p><b>{{ name }}</b>，欢迎。</p>
+{% else %}
+<p>您当前是访客，登录后可使用更多功能。</p>
+{% endif %}
+<hr>
+<h4>公寓管理员</h4>
+<p>以下是本楼管理员信息。</p>
+{{ render_table(managers, title) }}
+{% if user_type == 'manager' %}
+<hr>
+<h4>楼内房间</h4>
+<p>以下是本楼内房间信息。</p>
+{{ render_table(rooms, room_title) }}
+{{ render_pagination(pagination) }}
+{% endif %}
+
+{% endblock %}

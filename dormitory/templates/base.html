@@ -1,0 +1,83 @@
+{% from 'bootstrap5/nav.html' import render_nav_item %}
+{% from 'bootstrap5/utils.html' import render_messages, render_icon %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    {% block styles %}
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+
+    <title>学生公寓管理系统</title>
+
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container">
+            <a href="/" class="navbar-brand">学生公寓管理系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {{ render_nav_item('index', '首页') }}
+                    {% if current_user.is_authenticated %}
+                    {% if user_type == "student" %}
+                    {{ render_nav_item('info', '个人信息') }}
+                    {{ render_nav_item('report', '维修申报') }}
+                    {{ render_nav_item('visit', '访客登记') }}
+                    {% elif user_type == "manager" %}
+                    {{ render_nav_item('manage', '公寓管理') }}
+                    {{ render_nav_item('fix', '维修处理') }}
+                    {% endif %}
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ms-md-auto">
+                    {% if current_user.is_authenticated %}
+                    {{ render_nav_item('settings', '设置') }}
+                    {{ render_nav_item('logout', '退出') }}
+                    {% else %}
+                    {{ render_nav_item('login', '登录') }}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    {% for message in get_flashed_messages(with_categories=True) %}
+    <div class="alert alert-dismissible alert-{{ message[0] }}">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{ message[1] }}
+    </div>
+    {% endfor %}
+
+    <div class="container">
+        <div class="page-header" id="banner">
+            <h1></h1>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <small>&copy; 2024 Haoyu Tang</small>
+    </footer>
+
+
+    {% block scripts %}
+    {{ bootstrap.load_js() }}
+    {% endblock %}
+
+</body>
+
+</html>

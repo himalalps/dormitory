@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>维修申报</h2>
+<p><b>{{ name }}</b>，欢迎。</p>
+{{ render_form(form) }}
+{% if fix %}
+<hr>
+<h2>维修记录</h2>
+<p>以下是所有维修记录。</p>
+{{ render_table(fix, title, show_actions=True, actions_title="", custom_actions=[
+('详细信息', 'info-square', ('fix_info', [('fix_id', ':id')]))
+]) }}
+{{ render_pagination(pagination, align='right') }}
+{% endif %}
+{% endblock %}

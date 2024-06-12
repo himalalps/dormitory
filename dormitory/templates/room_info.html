@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/table.html' import render_table %}
+
+{% block content %}
+<h2>{{ room.id }}室信息</h2>
+<p><b>{{ name }}</b>，欢迎。</p>
+{% if room.residents %}
+<p>可居住{{ room.spaces }}人，已入住{{ room.residents }}人，以下是相关信息。</p>
+<h4>居住学生</h4>
+{% else %}
+<p>可居住{{ room.spaces }}人，暂无学生入住。</p>
+{% endif %}
+{{ render_table(students, title, show_actions=True, actions_title="", new_url=url_for('new_student', room_id=room.id), delete_url=('delete_student', [('student_id', ':id')])) }}
+<h4>修改/删除房间</h4>
+{{ render_form(form, button_map={'submit': 'primary', 'delete': 'danger'}) }}
+{% endblock %}

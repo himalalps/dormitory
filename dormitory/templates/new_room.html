@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>公寓信息</h2>
+<p><b>{{ name }}</b>，欢迎，填写以下内容为{{ current_user.dorm_id }}号楼添加房间。</p>
+{{ render_form(form) }}
+
+{% endblock %}

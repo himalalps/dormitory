@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<h2>登录</h2>
+<p>请使用您的用户名（学/工号）和密码登录。</p>
+{{ render_form(form) }}
+{% endblock %}

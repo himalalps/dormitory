@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<h2>转宿申请</h2>
+<p><b>{{ name }}</b>，欢迎，以下是该申请的详细信息。</p>
+<h4>学生学号</h4>
+<p>{{ student.id }}</p>
+<h4>转出房间</h4>
+<p>{{ move.original_room_id }}</p>
+<h4>转入房间</h4>
+<p>{{ move.target_room_id }}</p>
+<h4>申请时间</h4>
+<p>{{ move.submit_time }}</p>
+<h4>申请原因</h4>
+<p>{{ move.reason }}</p>
+<h4>申请状态</h4>
+<p>{{ move.status }}</p>
+{% if move.status == '未处理' %}
+{{ render_form(form, button_map={'agree': 'primary', 'reject': 'danger'}) }}
+{% endif %}
+{% endblock %}
