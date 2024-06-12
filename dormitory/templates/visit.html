@@ -7,6 +7,7 @@
 <h2>访客登记</h2>
 <p><b>{{ name }}</b>，欢迎，请填写以下信息以为访客进行预约。</p>
 {{ render_form(form) }}
+{% if visitor %}
 <hr>
 <h2>访客信息</h2>
 <p>以下是所有访客的信息。</p>
@@ -14,4 +15,5 @@
 ('详细信息', 'info-square', ('visitor_info', [('visitor_id', ':id')]))
 ]) }}
 {{ render_pagination(pagination, align='right') }}
+{% endif %}
 {% endblock %}

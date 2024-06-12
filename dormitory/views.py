@@ -497,6 +497,8 @@ def room_info(room_id):
                 flash("房间内有学生，无法删除！", category="danger")
                 return redirect(url_for("room_info", room_id=room_id))
             try:
+                for fix in room.fixes:
+                    db.session.delete(fix)
                 db.session.delete(room)
                 db.session.commit()
                 flash("删除成功！", category="info")
@@ -604,6 +606,12 @@ def delete_student(student_id):
     if room.dorm_id != current_user.dorm_id:
         return redirect(url_for("index"))
     try:
+        for fix in student.fixes:
+            db.session.delete(fix)
+        for visitor in student.visitors:
+            db.session.delete(visitor)
+        for move in student.moves:
+            db.session.delete(move)
         db.session.delete(student)
         db.session.commit()
         flash("删除成功！", category="info")
